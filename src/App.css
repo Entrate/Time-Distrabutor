@@ -1,0 +1,129 @@
+
+.main-button-container {
+  display: flex;
+  
+}
+.btn-and-timer {
+  width: 100%;
+}
+.btn-and-timer + .btn-and-timer {
+  margin-left: 10%;
+}
+.main-button {
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  background-color: gray;
+  border: none;
+  font-weight: bold;
+  font-size: 4.7vw;
+  padding: 1em;
+  color: white;
+  width: 100%;
+  flex-shrink: 0;
+  transition: all 0.10s;
+}
+.button-text {
+  margin: 0;
+}
+.main-button:hover,.main-button:focus  {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 25%);
+}
+.main-button:active {
+  scale: 0.95;
+}
+.timer {
+  text-align: center;
+  font-size: 4.7vw;
+  font-weight: bold;
+  letter-spacing: 0.1vw;
+  margin: 0.5em 0 -0.8em;
+}
+.sub-title {
+  text-align: center;
+  font-size: 2.5rem;
+
+}
+.time-spent-bar{
+  width: 95%;
+  background-color: black;
+  margin-inline: auto;
+  border-radius: 1.2em;
+  display: flex;
+  justify-content: space-between;
+}
+.left-bar, .right-bar {
+  color: white;
+  display: inline-block;
+  font-size: calc(1.7rem + 1vw);
+  font-weight: bold;
+  margin: 0;
+  padding: 0.2em 0;
+
+}
+.left-bar {
+  padding-left: 5%;
+  width: 100%;
+  background-color: rgba(248, 182, 85, 1);
+  border-radius: 0.5em 0 0 0.5em;
+}
+.right-bar {
+  text-align:end;
+  width: 100%;
+  padding-right: 5%;
+  background-color: rgba(160, 158, 254, 1);
+  border-radius: 0 0.5em 0.5em 0;
+}
+.sign-in-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: auto;
+  margin-top: 15em;
+  padding: 3em;
+  border-radius: 2em;
+  background-color: rgb(245, 245, 245);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 25%);
+  max-width: 700px;
+}
+.sign-in-box .title {
+  font-size: 4rem;
+  margin: 0 0 1em 0;
+}
+.sign-in-with-google-button {
+  background:#4285f4;
+  color:white;
+  border:none;
+  margin-inline: auto;
+
+  border-radius: 1em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.google-logo {
+  width:20%;
+  padding: 0.3em;
+  background:white;
+  border-radius:50%;
+}
+.sign-in-with-google-button .text {
+  margin-right: 5%;
+  left: 5%;
+  position: relative;
+  font-size: 3rem;
+  line-height: 5rem;
+}
+@media (min-width: 500px) {
+
+  .sign-in-box .title {
+    font-size: 5rem;
+
+  }
+  .sign-in-with-google-button {
+    padding: 1em 0;
+  }
+  .sign-in-with-google-button .text {
+    font-size: 4rem;
+  }
+}
