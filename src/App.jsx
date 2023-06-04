@@ -13,6 +13,15 @@ function App() {
   const [timeToday, setTimeToday] = useState({productive: 0,leasure: 0})
   const [authStatus, setAuthStatus] = useState(auth._isInitialized)
 
+
+  useEffect(() => {
+    fetch("/api")
+      .then(res => res.json())
+      .then(data => {
+        console.log('Data: ', data)
+      })
+      .catch(err => console.log(err))
+  },[])
   let i = 0
   const getDatabaseData = async () => {
     const currentUserRef = doc(db, 'users', auth.currentUser.uid)
@@ -65,7 +74,8 @@ function App() {
   return (
     <>
     { authStatus ? 
-    <><MainButtonContainer 
+    <>
+    <MainButtonContainer 
       updateTimeToday={(e) => setTimeToday(e)}
       update={updateTime}
       time={timeToday} />
