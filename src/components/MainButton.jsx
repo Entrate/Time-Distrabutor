@@ -7,6 +7,13 @@ const MainButton = ({innerText,color, clickHadler,buttonState, update,time,type,
     backgroundColor: buttonState ? 'rgba(241, 107, 31, 1)' : color
   }
   const wordArr = innerText.split(' ').map((word, i) => <p key={i} className="button-text">{word}</p>)
+  const endWordArr = innerText.split(' ').map((word, i) => {
+  if(word == 'Start'){
+    return <p key={i} className="button-text">End</p>
+  } else {
+    return <p key={i} className="button-text">{word}</p>
+  }
+})
   const [timer, setTimer] = useState(time)
   const [timeOgj, setTimeobj] = useState({h: 0,m: 0,s: 0})
   const [displayTimer, setDisplayTimer] = useState(0)
@@ -15,7 +22,7 @@ const MainButton = ({innerText,color, clickHadler,buttonState, update,time,type,
   const visibility = document.visibilityState
   const currentUserRef = doc(db, 'users', auth.currentUser.uid)
   const keyForDb = type + 'CurrentDisplayTime'
-    const updateDomWithTrueValues = async () => {
+  const updateDomWithTrueValues = async () => {
       const res = await getDoc(currentUserRef)
       const data = res.data()
       const timeSenceTabWasLive = Math.floor((Date.now() - data.lastLogin) / 1000)
@@ -26,7 +33,6 @@ const MainButton = ({innerText,color, clickHadler,buttonState, update,time,type,
       // console.log(timeSenceTabWasLive)
       // console.log('Display Time Should be:',displayTimerBeforeTabHiding + timeSenceTabWasLive)
     }
-
     if(activeButton !== null){
       if(type === 'leasure' && activeButton === 0 || type === 'productive' && activeButton === 1){
         if(visibility === 'hidden'){
@@ -100,7 +106,7 @@ const MainButton = ({innerText,color, clickHadler,buttonState, update,time,type,
   
     return (
     <div className="btn-and-timer">
-      <button className="main-button" style={styles} onClick={clickHadler}>{wordArr}</button>
+      <button className="main-button" style={styles} onClick={clickHadler}>{buttonState ? endWordArr : wordArr}</button>
 
       {buttonState && <div className="timer">{timerLogic}</div>}
     </div>

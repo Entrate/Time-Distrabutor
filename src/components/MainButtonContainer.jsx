@@ -4,8 +4,8 @@ import MainButton from "./MainButton"
 import { auth, db } from "../firebase"
 import { doc, getDoc, setDoc } from "firebase/firestore"
 
-function MainButtonContainer({update, time, updateTimeToday}) {
-  const [buttonState,setButtonState] = useState({0:false,1:false})
+function MainButtonContainer({update, time, updateTimeToday, buttonState, setButtonState}) {
+  
   const [activeButton, setActiveButton] = useState(null)
 
   useEffect(() => {
@@ -49,6 +49,7 @@ function MainButtonContainer({update, time, updateTimeToday}) {
 
       setDoc(dateTodayRef, {
         timer: time,
+        date: Date.now()
       }, { merge: true})
     }
   }

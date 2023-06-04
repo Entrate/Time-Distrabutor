@@ -6,22 +6,15 @@ import TodaysUse from './components/TodaysUse'
 import SignInWithGoogle from './components/signInWithGoogle'
 import { auth, db } from './firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
+import GraphContainer from './components/GraphContainer'
 
 
 
 function App() {
   const [timeToday, setTimeToday] = useState({productive: 0,leasure: 0})
   const [authStatus, setAuthStatus] = useState(auth._isInitialized)
+  const [buttonState,setButtonState] = useState({0:false,1:false})
 
-
-  useEffect(() => {
-    fetch("/api")
-      .then(res => res.json())
-      .then(data => {
-        console.log('Data: ', data)
-      })
-      .catch(err => console.log(err))
-  },[])
   let i = 0
   const getDatabaseData = async () => {
     const currentUserRef = doc(db, 'users', auth.currentUser.uid)
@@ -35,6 +28,7 @@ function App() {
       if(dateInDataBase != dateNow && dateInDataBase != 'lid Date') {
         setDoc(doc(db, 'users', `${auth.currentUser.uid}/dates/${dateNow.split(' ').join('-')}`), {
           timer: timeToday,
+          date: Date.now()
         }, { merge: true  })
         setDoc(currentUserRef, {
           timer: {productive: 0,leasure: 0},
@@ -74,16 +68,29 @@ function App() {
   return (
     <>
     { authStatus ? 
-    <>
+    <div className='site-container'>
+    <h1 className='title'>WELCOME TO<br/>TIME DISTRABUTOR</h1>
+    <GraphContainer
+    buttonState={buttonState}
+    />
     <MainButtonContainer 
       updateTimeToday={(e) => setTimeToday(e)}
       update={updateTime}
-      time={timeToday} />
-      <TodaysUse
-      timer={timeToday} /></> :
-      <SignInWithGoogle 
+      time={timeToday}
+      buttonState={buttonState}
+      setButtonState={setButtonState} 
+    />
+    <TodaysUse
+      timer={timeToday}
+    />
+    <footer className='footer'>Design and all code made by amin.aliu.fi@gmail.com</footer>
+    </div>
+    :
+    <SignInWithGoogle 
       updateStatus={updateAuthStatus}
-      timer={timeToday}/>}
+      timer={timeToday}
+    />
+    }
     </>
   )
 }
